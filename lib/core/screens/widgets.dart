@@ -144,6 +144,7 @@ class ListOfFruits extends StatefulWidget {
 
 class _ListOfFruitsState extends State<ListOfFruits> {
   @override
+  // ignore: override_on_non_overriding_member
   double value = 0;
 
   @override

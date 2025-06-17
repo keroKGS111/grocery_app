@@ -32,7 +32,6 @@ dependencies:
   cupertino_icons: ^1.0.8
   flutter:
     sdk: flutter
-  flutter_launcher_icons: ^0.14.4
   flutter_rating_stars: ^1.1.0
   google_fonts: ^6.2.1
 
@@ -42,7 +41,7 @@ dev_dependencies:
     sdk: flutter
   flutter_launcher_icons: "^0.14.4"
 flutter_launcher_icons:
-  android: "grocrey_icon_app"
+  android: true
   ios: true
   image_path: "assets/images/grocrey_icon_app.webp"
   min_sdk_android: 21 # android min sdk min:16, default 21
