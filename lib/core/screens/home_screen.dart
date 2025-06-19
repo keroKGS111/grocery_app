@@ -1,15 +1,19 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:grocrey_app/core/model/product_item.dart';
+import 'package:grocrey_app/core/screens/cart_screen.dart';
 import 'package:grocrey_app/core/screens/widgets.dart';
 
+// ignore: must_be_immutable
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  const HomeScreen({super.key, required Map<Fruits, int> cartItem});
+
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen>
+    with AutomaticKeepAliveClientMixin {
   ///
   ///
   ///
@@ -81,6 +85,7 @@ class _HomeScreenState extends State<HomeScreen> {
   ///
   ///
   // ال List بتاعت الفواكه كلها
+
   List<Fruits> listFruits = [
     Fruits(
       imageOfFruit: "assets/images/banana.png",
@@ -258,12 +263,35 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
         ),
-        Text(
-          "Total price is \$ ${getTotalPrice().toStringAsFixed(2)}",
-          style: TextStyle(
-            color: Colors.black,
-            fontWeight: FontWeight.bold,
-            fontSize: 17,
+        SizedBox(
+          height: 70,
+          width: 370,
+          child: Expanded(
+            child: ElevatedButton(
+              style: ButtonStyle(
+                backgroundColor: WidgetStatePropertyAll(Color(0xff0CA201)),
+                shape: WidgetStatePropertyAll(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+              ),
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => CartScreen(cartItem: cartItem),
+                  ),
+                );
+              },
+              child: Text(
+                "\$ ${getTotalPrice().toStringAsFixed(2)} | Go to cart",
+                style: TextStyle(
+                  fontSize: 21,
+                  color: Colors.white,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
           ),
         ),
         SizedBox(height: 35),
@@ -275,6 +303,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Scaffold(
       ///
       ///
@@ -541,10 +570,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
             ),
-            SizedBox(height: 10),
+            SizedBox(height: 30),
           ],
         ),
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
